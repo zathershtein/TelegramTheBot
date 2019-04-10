@@ -1,0 +1,31 @@
+{
+  "name": "telegramthebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "start:dev": "ts-node-dev src/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zathershtein/TelegramTheBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zathershtein/TelegramTheBot/issues"
+  },
+  "homepage": "https://github.com/zathershtein/TelegramTheBot#readme",
+  "dependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^11.13.2",
+    "dotenv": "^7.0.0",
+    "telegraf": "^3.28.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.4.3"
+  }
+}
