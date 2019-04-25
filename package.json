@@ -21,8 +21,9 @@
   "dependencies": {
     "@types/dotenv": "^6.1.1",
     "@types/node": "^11.13.2",
+    "@types/node-telegram-bot-api": "^0.30.4",
     "dotenv": "^7.0.0",
-    "telegraf": "^3.28.0"
+    "node-telegram-bot-api": "^0.30.0"
   },
   "devDependencies": {
     "ts-node-dev": "^1.0.0-pre.32",
