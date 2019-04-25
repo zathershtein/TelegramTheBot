@@ -1,48 +1,52 @@
 import * as TelegramBot from "node-telegram-bot-api";
 import * as dotenv from "dotenv";
+import { Log } from "@uk/log";
 
 dotenv.config();
+const log  = new Log("INDEX");
 
 //TODO разобраться, что такое polling
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(process.env.TG_BOT_KEY, {polling: true});
 
 // Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
-  // 'msg' is the received Message from Telegram
-  // 'match' is the result of executing the regexp above on the text content
-  // of the message
-
-  const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
-
-  // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, resp);
+bot.onText(/\/start/, (msg) => {
+  bot.sendMessage(msg.chat.id, "Старт бота...\nДобро пожаловать!")
 });
 
-// Listen for any kind of message. There are different kinds of
-// messages.
+bot.onText(/\/sendpic/, (msg) => {
+  bot.sendPhoto(msg.chat.id,
+    "https://ok-vmeste.ru/upload//video/images/small/c9/7b/c97bba99e0b5926c6b67b14a3864a999.jpg",
+    {caption: "Лови кота!"});
+})
+
 bot.on('message', (msg) => {
+  log.debug("On message answer: ", msg);
+  
   const chatId = msg.chat.id;
+  const botGreeting = "Hello, dear user!";
+  const botBye = "Bye-bye!";
+  
+  const checkGreeting = "hi";
+  const checkBye = "bye";
 
-  // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, 'Received your message');
+  if (msg.text.toLowerCase().indexOf(checkGreeting) === 0) {
+    bot.sendMessage(msg.chat.id, botGreeting);
+  }
+  
+  if (msg.text.toLowerCase().includes(checkBye)) {
+    bot.sendMessage(msg.chat.id, botBye);
+  }
+  
+  
+  // bot.sendMessage(chatId, 'Не понимаю твою команду ;-(');
+  
 });
 
-
-
-
-
-
-
-// const Telegraf = require('telegraf')
-
-// // import Telegraf from "telegraf";
-
-// //TODO choose right type for ctx
-// const bot = new Telegraf(<string>process.env.TG_BOT_KEY);
-// bot.start((ctx: any) => ctx.reply('Welcome!'));
-// bot.help((ctx: any) => ctx.reply('Send me a sticker'));
-// bot.on('sticker', (ctx: any) => ctx.reply('👍'));
-// bot.hears('hi', (ctx: any) => ctx.reply('Hey there'));
-// bot.launch();
+// Testing
+bot.on("sticker", (msg) => {
+  const answer = "Super sticker you have!";
+  log.debug(answer, msg);
+  const chatId = msg.chat.id;
+  bot.sendMessage(chatId, answer);
+})
