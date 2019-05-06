@@ -1,19 +1,28 @@
 import * as TelegramBot from "node-telegram-bot-api";
 import * as dotenv from "dotenv";
 import { Log } from "@uk/log";
-import { Main } from "./states/main";
+import { MainMenu } from "./states/main";
+import { getTemp } from "./orange";
+import { StatusMenu } from "./states/status";
 
 dotenv.config();
-const log  = new Log("INDEX");
-
-//TODO разобраться, что такое polling
-// Create a bot that uses 'polling' to fetch new updates
+const log  = new Log(__filename);
 const bot = new TelegramBot(process.env.TG_BOT_KEY, {polling: true});
 
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, "Здоровеньки були!", {
-    reply_markup: Main
+    reply_markup: MainMenu
   })
+});
+
+bot.onText(/Статус девайсу/, (msg) => {
+  bot.sendMessage(
+    msg.chat.id,
+    `Температура девайсу: ${getTemp()}\n
+    `,
+    {
+      reply_markup: StatusMenu
+    })
 });
 
 bot.on('message', (msg) => {
@@ -43,12 +52,13 @@ bot.on('message', (msg) => {
       chatId,
       "Yes, I'm robot but not in that way!"
     );
-  } else {
-      bot.sendMessage(
-      chatId,
-      'Не понимаю твою команду ;-('
-      );
   }
+  // else {
+  //     bot.sendMessage(
+  //     chatId,
+  //     'Не понимаю твою команду ;-('
+  //     );
+  // }
 
   // Example: answer on command - send photo to user
   // bot.onText(/\/sendpic/, (msg) => {

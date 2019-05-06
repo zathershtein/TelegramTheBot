@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "start:dev": "ts-node-dev src/index",
+    "start": "ts-node-dev src/index 2>&1 | MAX_DEPTH=5 uk-log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
