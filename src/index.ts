@@ -2,7 +2,7 @@ import * as TelegramBot from "node-telegram-bot-api";
 import * as dotenv from "dotenv";
 import { Log } from "@uk/log";
 import { MainMenu } from "./states/main";
-import { getTemp } from "./orange";
+import { getTemp, getSystemLoad } from "./orange";
 import { StatusMenu } from "./states/status";
 
 dotenv.config();
@@ -18,12 +18,22 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/Статус девайсу/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
-    `Температура девайсу: ${getTemp() + " ᵒC"}\n
-    `,
-    {
-      reply_markup: StatusMenu
-    })
+    `🌡 Температура девайсу: ${getTemp() ? (getTemp() + " ᵒC") : "невідома"}\n📈 Завантаженність системи: ${getSystemLoad() ? getSystemLoad() : "невідома"}\n
+    `)
 });
+
+bot.onText(/Попрощатися ↩️/, (msg) => {
+  bot.sendMessage(msg.chat.id, "На все добре! 👋")
+});
+
+
+//TODO
+bot.onText(/Опитати входи/, (msg) => {
+  bot.sendMessage(
+    msg.chat.id,
+    `// TODO`)
+});
+
 
 bot.on('message', (msg) => {
   log.debug("On message answer: ", msg);
@@ -53,44 +63,4 @@ bot.on('message', (msg) => {
       "Yes, I'm robot but not in that way!"
     );
   }
-  // else {
-  //     bot.sendMessage(
-  //     chatId,
-  //     'Не понимаю твою команду ;-('
-  //     );
-  // }
-
-  // Example: answer on command - send photo to user
-  // bot.onText(/\/sendpic/, (msg) => {
-  //   bot.sendPhoto(chatId,
-  //     "https://ok-vmeste.ru/upload//video/images/small/c9/7b/c97bba99e0b5926c6b67b14a3864a999.jpg",
-  //     {caption: "Лови кота!"});
-  // })
-
-// Example: answer on sticker
-// bot.on("sticker", (msg) => {
-//   const answer = "Super sticker you have!";
-//   log.debug(answer, msg);
-//   const chatId = chatId;
-//   bot.sendMessage(chatId, answer);
-// })
-
-  // Example: send location
-  // const location = "location";
-  // if (msg.text.toLowerCase().indexOf(location) === 0) {
-  //     bot.sendLocation(chatId, 44.97108, -104.27719);
-  //     bot.sendMessage(chatId, "Here is the point");
-  // }
-  
-  // Example: send venue
-  // if (msg.text.toLowerCase().indexOf("venue") === 0) {
-  //     bot.sendVenue(
-  //       chatId,
-  //       48.470328,
-  //       35.051422,
-  //       "Место встречи",
-  //       "ул. Сичеславская Набережная, 29"
-  //     )
-  // }
-  
 });
