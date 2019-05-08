@@ -1,9 +1,12 @@
 import * as TelegramBot from "node-telegram-bot-api";
 import * as dotenv from "dotenv";
 import { Log } from "@uk/log";
-import { MainMenu } from "./states/main";
-import { getTemp, getSystemLoad } from "./orange";
-import { StatusMenu } from "./states/status";
+
+import { MainMenu } from "./states/mainmenu";
+import { StateMenu } from "./states/devicestatemenu";
+
+import { getSysInfo } from "./orange";
+import { PATH_TO } from "../constants";
 
 dotenv.config();
 const log  = new Log(__filename);
@@ -18,7 +21,7 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/Статус девайсу/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
-    `🌡 Температура девайсу: ${getTemp() ? (getTemp() + " ᵒC") : "невідома"}\n📈 Завантаженність системи: ${getSystemLoad() ? getSystemLoad() : "невідома"}\n
+    `🌡 Температура девайсу: ${getSysInfo(PATH_TO.TEMP) ? (getSysInfo(PATH_TO.TEMP) + " ᵒC") : "невідома"}\n📈 Завантаженність системи: ${getSysInfo(PATH_TO.LOAD) ? getSysInfo(PATH_TO.LOAD) : "невідома"}\n
     `)
 });
 
@@ -27,7 +30,7 @@ bot.onText(/Попрощатися ↩️/, (msg) => {
 });
 
 
-//TODO
+// TODO
 bot.onText(/Опитати входи/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
@@ -35,32 +38,36 @@ bot.onText(/Опитати входи/, (msg) => {
 });
 
 
-bot.on('message', (msg) => {
-  log.debug("On message answer: ", msg);
+
+
+// Answer examples
+
+// bot.on('message', (msg) => {
+//   log.debug("On message answer: ", msg);
   
-  const chatId = msg.chat.id;
-  const botGreeting = "Hello, dear ";
-  const botBye = "Bye-bye!";
-  const checkGreeting = "hi";
-  const checkBye = "bye";
-  const robot = "I am robot";
+//   const chatId = msg.chat.id;
+//   const botGreeting = "Hello, dear ";
+//   const botBye = "Bye-bye!";
+//   const checkGreeting = "hi";
+//   const checkBye = "bye";
+//   const robot = "I am robot";
   
-  if (msg.text.toString().toLowerCase().indexOf(checkGreeting) === 0) {
-    bot.sendMessage(
-      chatId,
-      botGreeting + "<b>" + msg.from.first_name + "</b>" +"!", {
-        parse_mode: "HTML"
-      }
-    );
-  } else if (msg.text.toLowerCase().includes(checkBye)) {
-    bot.sendMessage(
-      chatId,
-      botBye
-    );
-  } else if (msg.text.toLowerCase().indexOf(robot.toLowerCase()) === 0) {
-    bot.sendMessage(
-      chatId,
-      "Yes, I'm robot but not in that way!"
-    );
-  }
-});
+//   if (msg.text.toString().toLowerCase().indexOf(checkGreeting) === 0) {
+//     bot.sendMessage(
+//       chatId,
+//       botGreeting + "<b>" + msg.from.first_name + "</b>" +"!", {
+//         parse_mode: "HTML"
+//       }
+//     );
+//   } else if (msg.text.toLowerCase().includes(checkBye)) {
+//     bot.sendMessage(
+//       chatId,
+//       botBye
+//     );
+//   } else if (msg.text.toLowerCase().indexOf(robot.toLowerCase()) === 0) {
+//     bot.sendMessage(
+//       chatId,
+//       "Yes, I'm robot but not in that way!"
+//     );
+//   }
+// });
