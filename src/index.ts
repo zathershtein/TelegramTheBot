@@ -18,7 +18,7 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/Статус девайсу/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
-    `Температура девайсу: ${getTemp()}\n
+    `Температура девайсу: ${getTemp() + " ᵒC"}\n
     `,
     {
       reply_markup: StatusMenu
