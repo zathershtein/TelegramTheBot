@@ -7,18 +7,25 @@ import { StateMenu } from "./states/devicestatemenu";
 
 import { getSysInfo } from "./orange";
 import { PATH_TO } from "../constants";
+import { StartMenu } from "./states/startmenu";
 
 dotenv.config();
 const log  = new Log(__filename);
 const bot = new TelegramBot(process.env.TG_BOT_KEY, {polling: true});
 
-bot.onText(/\/start/, (msg) => {
+bot.onText(/\/start|Старт/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
     "Здоровеньки були!",
     {
       reply_markup: MainMenu
     })
+});
+
+bot.onText(/\/help/, (msg) => {
+  bot.sendMessage(
+    msg.chat.id,
+    "Тут буде опис, що має та може робити бот...")
 });
 
 bot.onText(/Статус девайсу/, (msg) => {
@@ -46,7 +53,10 @@ bot.onText(/В головне меню ↩️/, (msg) => {
 bot.onText(/Попрощатися 👋/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
-    "На все добре! 👋"
+    "На все добре! 👋",
+    {
+      reply_markup: StartMenu
+    }
   )
 });
 
