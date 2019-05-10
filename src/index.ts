@@ -19,10 +19,16 @@ bot.onText(/\/start/, (msg) => {
 });
 
 bot.onText(/Статус девайсу/, (msg) => {
+  const temp = getSysInfo(PATH_TO.TEMP).temp;
+  const load = getSysInfo(PATH_TO.LOAD).load;
+  const mem = getSysInfo(PATH_TO.MEMORY);
+
   bot.sendMessage(
     msg.chat.id,
-    `🌡 Температура девайсу: ${getSysInfo(PATH_TO.TEMP) ? (getSysInfo(PATH_TO.TEMP) + " ᵒC") : "невідома"}\n📈 Завантаженність системи: ${getSysInfo(PATH_TO.LOAD) ? getSysInfo(PATH_TO.LOAD) : "невідома"}\n
-    `)
+    `\n\n🌡 Температура ЦП: ${temp ? (temp + " ᵒC") : "невідома"
+    }\n\n📊 Завантаженність системи: ${load ? load : "невідома"
+    }\n\n💾 ОЗП: всього ${mem.memTotal ? (mem.memTotal + " Mb") : "невідомо"}, вільної ${mem.memFree ? (mem.memFree + " Mb") : "невідомо"
+    }\n\n`)
 });
 
 bot.onText(/Попрощатися ↩️/, (msg) => {
