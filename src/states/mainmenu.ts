@@ -7,7 +7,8 @@ export const MainMenu: ReplyKeyboardMarkup = {
             { text: "Опитати входи"}
         ],
         [
-            { text: "Попрощатися ↩️" }
+            { text: "Попрощатися 👋️" }
         ]
-    ]
+    ],
+    resize_keyboard: true
 }

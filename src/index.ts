@@ -13,9 +13,12 @@ const log  = new Log(__filename);
 const bot = new TelegramBot(process.env.TG_BOT_KEY, {polling: true});
 
 bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.chat.id, "Здоровеньки були!", {
-    reply_markup: MainMenu
-  })
+  bot.sendMessage(
+    msg.chat.id,
+    "Здоровеньки були!",
+    {
+      reply_markup: MainMenu
+    })
 });
 
 bot.onText(/Статус девайсу/, (msg) => {
@@ -31,18 +34,39 @@ bot.onText(/Статус девайсу/, (msg) => {
     }\n\n`)
 });
 
-bot.onText(/Попрощатися ↩️/, (msg) => {
-  bot.sendMessage(msg.chat.id, "На все добре! 👋")
+bot.onText(/В головне меню ↩️/, (msg) => {
+  bot.sendMessage(
+    msg.chat.id,
+    "Йдемо назад...",
+    {
+      reply_markup: MainMenu
+    })
 });
 
+bot.onText(/Попрощатися 👋/, (msg) => {
+  bot.sendMessage(
+    msg.chat.id,
+    "На все добре! 👋"
+  )
+});
 
 // TODO
 bot.onText(/Опитати входи/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
-    `// TODO`)
+    "Оберіть тип входів",
+    {
+      reply_markup: StateMenu
+    })
 });
 
+// TODO
+bot.onText(/Аналогові|Дискретні/, (msg) => {
+  bot.sendMessage(
+    msg.chat.id,
+    "TODO: ще не готово"
+  )
+});
 
 
 
