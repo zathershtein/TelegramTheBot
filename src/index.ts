@@ -2,12 +2,13 @@ import * as TelegramBot from "node-telegram-bot-api";
 import * as dotenv from "dotenv";
 import { Log } from "@uk/log";
 
-import { MainMenu } from "./states/mainmenu";
-import { StateMenu } from "./states/devicestatemenu";
+import { mainMenu } from "./states/mainmenu";
+import { stateMenu } from "./states/devicestatemenu";
 
 import { getSysInfo } from "./orange";
 import { PATH_TO } from "../constants";
 import { StartMenu } from "./states/startmenu";
+import { chooseIO } from "./states/inlinechooseio";
 
 dotenv.config();
 const log  = new Log(__filename);
@@ -18,7 +19,7 @@ bot.onText(/\/start|Старт/, (msg) => {
     msg.chat.id,
     "Здоровеньки були!",
     {
-      reply_markup: MainMenu
+      reply_markup: mainMenu
     })
 });
 
@@ -46,7 +47,7 @@ bot.onText(/В головне меню ↩️/, (msg) => {
     msg.chat.id,
     "Йдемо назад...",
     {
-      reply_markup: MainMenu
+      reply_markup: mainMenu
     })
 });
 
@@ -66,7 +67,7 @@ bot.onText(/Опитати входи/, (msg) => {
     msg.chat.id,
     "Оберіть тип входів",
     {
-      reply_markup: StateMenu
+      reply_markup: stateMenu
     })
 });
 
@@ -74,7 +75,9 @@ bot.onText(/Опитати входи/, (msg) => {
 bot.onText(/Аналогові|Дискретні/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
-    "TODO: ще не готово"
+    "TODO: ще не готово", {
+      reply_markup: chooseIO
+    }
   )
 });
 

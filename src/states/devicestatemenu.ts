@@ -1,6 +1,6 @@
 import { ReplyKeyboardMarkup } from "node-telegram-bot-api";
 
-export const StateMenu: ReplyKeyboardMarkup = {
+export const stateMenu: ReplyKeyboardMarkup = {
     keyboard: [
         [
             { text: "Аналогові" }, { text: "Дискретні" }

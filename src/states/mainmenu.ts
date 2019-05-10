@@ -1,6 +1,6 @@
 import { ReplyKeyboardMarkup } from "node-telegram-bot-api";
 
-export const MainMenu: ReplyKeyboardMarkup = {
+export const mainMenu: ReplyKeyboardMarkup = {
     keyboard: [
         [
             { text: "Статус девайсу" },
