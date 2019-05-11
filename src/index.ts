@@ -9,6 +9,7 @@ import { getSysInfo } from "./orange";
 import { PATH_TO } from "../constants";
 import { StartMenu } from "./states/startmenu";
 import { chooseIO } from "./states/inlinechooseio";
+import { getPicture, Webcam } from "./orange/node-webcam";
 
 dotenv.config();
 const log  = new Log(__filename);
@@ -81,6 +82,15 @@ bot.onText(/Аналогові|Дискретні/, (msg) => {
   )
 });
 
+bot.onText(/Отримати фото/, (msg) => {
+  getPicture(Webcam).then(() => {
+    bot.sendPhoto(
+      msg.chat.id,
+      "img/picture.jpg"
+    );
+  });
+  
+});
 
 
 // Answer examples

@@ -1,37 +1,33 @@
-const NodeWebcam = require( "node-webcam" );
+import * as NodeWebcam from "node-webcam";
 
-//Default options
-
+// Options description: https://www.npmjs.com/package/node-webcam
 const opts = {
-    //Picture related
     width: 1280,
     height: 720,
     quality: 100,
-
     delay: 0,
-
-    //Save shots in memory
     saveShots: true,
-
-    // [jpeg, png] support varies
-    // Webcam.OutputTypes
     output: "jpeg",
-
-    //Which camera to use
-    //Use Webcam.list() for results
-    //false for default device
     device: false,
-
-    // [location, buffer, base64]
-    // Webcam.CallbackReturnTypes
     callbackReturn: "location",
-
-    //Logging
     verbose: false
 };
 
+export const Webcam = NodeWebcam.create( opts );
 
-// const Webcam = NodeWebcam.create( opts );
+export async function getPicture (webcam: any) {
+    await NodeWebcam.capture( "img/picture", opts, function( err: any, data: any ) {
+        console.log("Пишем файл...");
+    });
+}
+
+
+
+
+
+
+
+
 
 // Webcam.list( function( list: any ) {
 //     //Use another device
@@ -39,18 +35,10 @@ const opts = {
 //     console.log("Используем камеру: ", anotherCam);
 // });
 
-export function getPicture (webcam: any) {
-    NodeWebcam.capture( "test_picture", opts, function( err: any, data: any ) {
-        console.log("Пишем файл...");
-    });
-}
-
-
 //Will automatically append location output type
 // Webcam.capture( "test_picture", function( err: any, data: any ) {
 //     console.log("Пишем файл");
 // } );
-
 
 //Also available for quick use
 
