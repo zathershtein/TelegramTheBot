@@ -1,4 +1,4 @@
-import * as NodeWebcam from "node-webcam";
+import * as nodeWebcam from "node-webcam";
 import * as fs from "fs";
 import { PATH_TO } from "../../constants";
 
@@ -15,26 +15,20 @@ export const opts = {
     verbose: false
 };
 
-export const Webcam = NodeWebcam.create( opts );
+export const webcam = nodeWebcam.create( opts );
 
-export async function getPicture (webcam: any) {
-    try {
-        if (!fs.existsSync(PATH_TO.PHOTO_DIR)) {
-            console.log("Creating directory for images...");
-            fs.mkdirSync(PATH_TO.PHOTO_DIR);
-        };    
-    } catch(err) {
-        if (err) {
-            if (err.code == 'ENOENT') {
-                console.error(err.message);
-            } else {
-                console.error(err);
-            }
-        }
-    }
+export async function takePicture (webcam: any): Promise<any> {
+    if (!fs.existsSync(PATH_TO.PHOTO_DIR)) {
+        console.log("Creating directory for images...");
+        fs.mkdirSync(PATH_TO.PHOTO_DIR);
+    };
     
-    await NodeWebcam.capture( PATH_TO.PHOTO_DIR + "/picture", opts, ( err: any, data: any ) => {
-        console.log("Пишем файл...");
+    return new Promise((resolve, reject) => {
+        resolve(
+            nodeWebcam.capture( PATH_TO.PHOTO_DIR + "/picture", opts, ( err: any, data: any ) => {
+                // return PATH_TO.PHOTO_DIR + "/picture.jpg"
+            })
+        );
     });
 }
 
