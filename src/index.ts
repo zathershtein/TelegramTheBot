@@ -83,13 +83,11 @@ bot.onText(/Аналогові|Дискретні/, (msg) => {
 });
 
 bot.onText(/Отримати фото/, (msg) => {
-  getPicture(Webcam).then(() => {
-    bot.sendPhoto(
-      msg.chat.id,
-      "img/picture.jpg"
-    );
-  });
-  
+  getPicture(Webcam);
+  bot.sendPhoto(
+    msg.chat.id,
+    PATH_TO.PHOTO_DIR + "/picture.jpg"
+  );
 });
 
 

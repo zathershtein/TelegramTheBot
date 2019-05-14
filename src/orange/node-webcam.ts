@@ -1,7 +1,9 @@
 import * as NodeWebcam from "node-webcam";
+import * as fs from "fs";
+import { PATH_TO } from "../../constants";
 
 // Options description: https://www.npmjs.com/package/node-webcam
-const opts = {
+export const opts = {
     width: 1280,
     height: 720,
     quality: 100,
@@ -16,7 +18,22 @@ const opts = {
 export const Webcam = NodeWebcam.create( opts );
 
 export async function getPicture (webcam: any) {
-    await NodeWebcam.capture( "img/picture", opts, function( err: any, data: any ) {
+    try {
+        if (!fs.existsSync(PATH_TO.PHOTO_DIR)) {
+            console.log("Creating directory for images...");
+            fs.mkdirSync(PATH_TO.PHOTO_DIR);
+        };    
+    } catch(err) {
+        if (err) {
+            if (err.code == 'ENOENT') {
+                console.error(err.message);
+            } else {
+                console.error(err);
+            }
+        }
+    }
+    
+    await NodeWebcam.capture( PATH_TO.PHOTO_DIR + "/picture", opts, ( err: any, data: any ) => {
         console.log("Пишем файл...");
     });
 }
