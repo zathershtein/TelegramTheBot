@@ -22,6 +22,11 @@ export async function takePicture (webcam: any): Promise<any> {
         console.log("Creating directory for images...");
         fs.mkdirSync(PATH_TO.PHOTO_DIR);
     };
+
+    if (fs.existsSync(PATH_TO.PHOTO_DIR + "/picture.jpg")) {
+        console.log("Deleting existing photo...");
+        fs.unlinkSync(PATH_TO.PHOTO_DIR + "/picture.jpg");
+    };
     
     return new Promise((resolve, reject) => {
         nodeWebcam.capture( PATH_TO.PHOTO_DIR + "/picture", opts, ( err: any, data: any ) => {
