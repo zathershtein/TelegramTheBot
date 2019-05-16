@@ -24,11 +24,9 @@ export async function takePicture (webcam: any): Promise<any> {
     };
     
     return new Promise((resolve, reject) => {
-        resolve(
-            nodeWebcam.capture( PATH_TO.PHOTO_DIR + "/picture", opts, ( err: any, data: any ) => {
-                // return PATH_TO.PHOTO_DIR + "/picture.jpg"
-            })
-        );
+        nodeWebcam.capture( PATH_TO.PHOTO_DIR + "/picture", opts, ( err: any, data: any ) => {
+            resolve(PATH_TO.PHOTO_DIR + "/picture.jpg");
+        });
     });
 }
 

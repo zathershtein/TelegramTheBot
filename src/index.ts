@@ -83,13 +83,9 @@ bot.onText(/Аналогові|Дискретні/, async (msg) => {
 });
 
 bot.onText(/Отримати фото/, async (msg) => {
-  const prom = await takePicture(webcam);
-  // console.log("PATH: ", path)
-  prom.then(
-    await bot.sendPhoto(
-      msg.chat.id,
-      PATH_TO.PHOTO_DIR + "/picture.jpg"
-    )
+  const path = await takePicture(webcam);
+  await bot.sendPhoto(
+    msg.chat.id,
+    path
   )
-  
 });
