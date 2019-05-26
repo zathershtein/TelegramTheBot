@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "ts-node-dev": "^1.0.0-pre.32",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.5"
   }
 }
