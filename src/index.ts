@@ -11,7 +11,8 @@ import { StartMenu } from "./states/startmenu";
 import { chooseIO } from "./states/inlinechooseio";
 import { getPicture, Webcam } from "./orange/node-webcam";
 
-dotenv.config();
+dotenv.config({ path: `${process.cwd() + "/TelegramTheBot/.env"}` });
+
 const log  = new Log(__filename);
 const bot = new TelegramBot(process.env.TG_BOT_KEY, {polling: true});
 
