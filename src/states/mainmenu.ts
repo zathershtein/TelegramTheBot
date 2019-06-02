@@ -4,7 +4,7 @@ export const mainMenu: ReplyKeyboardMarkup = {
     keyboard: [
         [
             { text: "Статус девайсу" },
-            { text: "Опитати входи"}
+            { text: "Опитати входи" }
         ],
         [
             { text: "Отримати фото" }

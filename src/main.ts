@@ -2,19 +2,19 @@ import * as TelegramBot from "node-telegram-bot-api";
 import * as dotenv from "dotenv";
 import { Log } from "@uk/log";
 
+import { PATH_TO } from "../constants";
+
 import { mainMenu } from "./states/mainmenu";
 import { stateMenu } from "./states/devicestatemenu";
-
-import { getSysInfo } from "./orange";
-import { PATH_TO } from "../constants";
 import { StartMenu } from "./states/startmenu";
 import { chooseIO } from "./states/inlinechooseio";
-import { takePicture, webcam } from "./orange/node-webcam";
+
+import { takePicture, getSysInfo } from "./orange";
 
 dotenv.config({ path: `/opt/TelegramTheBot/.env` });
 
-const log  = new Log(__filename);
-const bot = new TelegramBot(process.env.TG_BOT_KEY, {polling: true});
+const log = new Log(__filename);
+const bot = new TelegramBot(process.env.TG_BOT_KEY, { polling: true });
 
 bot.onText(/\/start|Старт/, async (msg) => {
   await bot.sendMessage(
@@ -84,7 +84,7 @@ bot.onText(/Аналогові|Дискретні/, async (msg) => {
 });
 
 bot.onText(/Отримати фото/, async (msg) => {
-  const path = await takePicture(webcam);
+  const path = await takePicture();
   await bot.sendPhoto(
     msg.chat.id,
     path
