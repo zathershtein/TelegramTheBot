@@ -2,10 +2,10 @@
   "name": "telegramthebot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "ts-node-dev src/main 2>&1 | MAX_DEPTH=5 uk-log",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "sudo apt-get install -y fswebcam && tsc"
   },
   "repository": {
     "type": "git",

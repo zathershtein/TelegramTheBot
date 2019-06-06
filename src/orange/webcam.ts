@@ -1,6 +1,6 @@
-import * as nodeWebcam from "node-webcam";
-import * as fs from "fs";
-import { PATH_TO } from "../../constants";
+import * as nodeWebcam from "node-webcam"
+import * as fs from "fs"
+import { PATH_TO, CAPTURE_SETTINGS } from "../constants"
 
 // Options description: https://www.npmjs.com/package/node-webcam
 export const opts = {
@@ -15,7 +15,7 @@ export const opts = {
     verbose: false
 };
 
-export const webcam = nodeWebcam.create(opts);
+// export const webcam = nodeWebcam.create(opts);
 
 export async function takePicture(): Promise<string> {
     if (!fs.existsSync(PATH_TO.PHOTO_DIR)) {
@@ -23,53 +23,36 @@ export async function takePicture(): Promise<string> {
         fs.mkdirSync(PATH_TO.PHOTO_DIR);
     };
 
-    if (fs.existsSync(PATH_TO.PHOTO_DIR + "/picture.jpg")) {
+    if (fs.existsSync(
+        PATH_TO.PHOTO_DIR +
+        CAPTURE_SETTINGS.FILENAME +
+        CAPTURE_SETTINGS.EXTENTION
+    )) {
         console.log("Deleting existing photo...");
-        fs.unlinkSync(PATH_TO.PHOTO_DIR + "/picture.jpg");
+        fs.unlinkSync(
+            PATH_TO.PHOTO_DIR +
+            CAPTURE_SETTINGS.FILENAME +
+            CAPTURE_SETTINGS.EXTENTION
+        )
     };
 
     return new Promise((resolve, reject) => {
         try {
-            console.log(PATH_TO.PHOTO_DIR + "/picture");
-            nodeWebcam.capture(PATH_TO.PHOTO_DIR + "/picture", opts, (err: any, data: any) => {
-                console.log("DATA: ", data);
-                resolve(PATH_TO.PHOTO_DIR + "/picture.jpg");
+            nodeWebcam.capture(PATH_TO.PHOTO_DIR + CAPTURE_SETTINGS.FILENAME, opts, (err: Error, data: any) => {
+                if (err) {
+                    throw err
+                } else {
+                    resolve(data);
+                    return (
+                        PATH_TO.PHOTO_DIR +
+                        CAPTURE_SETTINGS.FILENAME +
+                        CAPTURE_SETTINGS.EXTENTION
+                    );
+                };
             });
         } catch (error) {
-            // console.log("ERROR: ", error);
-            reject("Cannot get photo!!!!!!!!!");
-        }
-
+            console.log("--------------ERROR-----------: ", error);
+            reject(error);
+        };
     });
 }
-
-
-
-
-
-
-
-
-
-// Webcam.list( function( list: any ) {
-//     //Use another device
-//     var anotherCam = NodeWebcam.create( { device: list[ 0 ] } );
-//     console.log("Используем камеру: ", anotherCam);
-// });
-
-//Will automatically append location output type
-// Webcam.capture( "test_picture", function( err: any, data: any ) {
-//     console.log("Пишем файл");
-// } );
-
-//Also available for quick use
-
-//Return type with base 64 image
-// var opts = {
-//     callbackReturn: "base64"
-// };
-
-// NodeWebcam.capture( "test_picture", opts, function( err: any, data: any ) {
-//     var image = "<img src='" + data + "'>";
-//     fs.writeFileSync("./test.jpeg", data);
-// });

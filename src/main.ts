@@ -1,15 +1,15 @@
-import * as TelegramBot from "node-telegram-bot-api";
-import * as dotenv from "dotenv";
-import { Log } from "@uk/log";
+import * as TelegramBot from "node-telegram-bot-api"
+import * as dotenv from "dotenv"
+import { Log } from "@uk/log"
 
-import { PATH_TO } from "../constants";
+import { PATH_TO } from "./constants"
 
-import { mainMenu } from "./states/mainmenu";
-import { stateMenu } from "./states/devicestatemenu";
-import { StartMenu } from "./states/startmenu";
-import { chooseIO } from "./states/inlinechooseio";
+import { mainMenu } from "./states/mainmenu"
+import { stateMenu } from "./states/devicestatemenu"
+import { StartMenu } from "./states/startmenu"
+import { chooseIO } from "./states/inlinechooseio"
 
-import { takePicture, getSysInfo } from "./orange";
+import { takePicture, getSysInfo } from "./orange"
 
 dotenv.config({ path: `/opt/TelegramTheBot/.env` });
 

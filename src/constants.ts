@@ -3,5 +3,10 @@ export const PATH_TO = {
     LOAD: "/proc/loadavg",
     MEMORY: "/proc/meminfo",
     // TEMP: "./src/orange/tests/testDataTemp",
-    PHOTO_DIR: "img"
+    PHOTO_DIR: "img/",
+}
+
+export const CAPTURE_SETTINGS = {
+    FILENAME: "picture",
+    EXTENTION: ".jpg",
 }

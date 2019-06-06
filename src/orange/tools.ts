@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { PATH_TO } from "../../constants";
+import { PATH_TO } from "../constants";
 import { Log } from "@uk/log";
 
 export type SysInfo = number | string;
