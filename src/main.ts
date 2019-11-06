@@ -11,7 +11,7 @@ import { chooseIO } from "./states/inlinechooseio"
 
 import { takePicture, getSysInfo } from "./orange"
 
-dotenv.config({ path: `/opt/TelegramTheBot/.env` });
+dotenv.config();
 
 const log = new Log(__filename);
 const bot = new TelegramBot(process.env.TG_BOT_KEY, { polling: true });
