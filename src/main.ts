@@ -6,7 +6,7 @@ import { mainMenu } from "./states/mainmenu";
 import { stateMenu } from "./states/devicestatemenu";
 
 import { getSysInfo } from "./orange";
-import { PATH_TO } from "../constants";
+import { PATH_TO } from "./constants";
 import { StartMenu } from "./states/startmenu";
 import { chooseIO } from "./states/inlinechooseio";
 import { takePicture, webcam } from "./orange/node-webcam";
