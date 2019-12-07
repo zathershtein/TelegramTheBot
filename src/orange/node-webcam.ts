@@ -12,36 +12,28 @@ export const opts = {
     output: "jpeg",
     device: false,
     callbackReturn: "location",
-    verbose: false
+    verbose: false,
 };
 
-export const webcam = nodeWebcam.create( opts );
+export const webcam = nodeWebcam.create(opts);
 
-export async function takePicture (webcam: any): Promise<any> {
+export async function takePicture(webcam: any): Promise<any> {
     if (!fs.existsSync(PATH_TO.PHOTO_DIR)) {
         console.log("Creating directory for images...");
         fs.mkdirSync(PATH_TO.PHOTO_DIR);
-    };
+    }
 
     if (fs.existsSync(PATH_TO.PHOTO_DIR + "/picture.jpg")) {
         console.log("Deleting existing photo...");
         fs.unlinkSync(PATH_TO.PHOTO_DIR + "/picture.jpg");
-    };
-    
+    }
+
     return new Promise((resolve, reject) => {
-        nodeWebcam.capture( PATH_TO.PHOTO_DIR + "/picture", opts, ( err: any, data: any ) => {
+        nodeWebcam.capture(PATH_TO.PHOTO_DIR + "/picture", opts, (err: any, data: any) => {
             resolve(PATH_TO.PHOTO_DIR + "/picture.jpg");
         });
     });
 }
-
-
-
-
-
-
-
-
 
 // Webcam.list( function( list: any ) {
 //     //Use another device

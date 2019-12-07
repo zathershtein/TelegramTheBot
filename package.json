@@ -2,16 +2,16 @@
   "name": "telegramthebot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "start": "ts-node-dev src/index 2>&1 | MAX_DEPTH=5 uk-log",
+    "start": "ts-node-dev src/main 2>&1 | MAX_DEPTH=5 uk-log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zathershtein/TelegramTheBot.git"
   },
-  "author": "",
+  "author": "zathershtein",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zathershtein/TelegramTheBot/issues"

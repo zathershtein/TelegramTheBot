@@ -1,29 +1,28 @@
 {
-  "compilerOptions": {
-      "baseUrl": ".",
-      "paths": { "*": ["types/*"] },
-      "target": "es2017",
-      "module": "commonjs",
-      "strict": true,
-      "strictNullChecks": false,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "declaration": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "suppressImplicitAnyIndexErrors": true,
-      "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "pretty": true,
-      "lib": [
-          "es2017", "dom"
-      ],
-      "sourceMap": true,
-      "outDir": "./dist"
-  },
-  "include": [
-      "./src/**/*.ts",
-      "!./node_modules/**/*.ts"
-  ],
-  "compileOnSave": true
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "strict": true,
+        "strictNullChecks": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "declaration": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "pretty": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["es2017"],
+        "sourceMap": true,
+        "outDir": "dist",
+        "baseUrl": "src",
+        "rootDirs": ["src"],
+        "paths": {
+            "*": ["node_modules/*", "src/types/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "src/main.ts"],
+    "exclude": ["node_modules", "dist"]
 }
