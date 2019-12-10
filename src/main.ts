@@ -70,8 +70,13 @@ if (TELEGRAM_BOT_TOKEN) {
     });
 
     bot.onText(/Отримати фото/, async msg => {
-        const path = await takePicture();
-        await bot.sendPhoto(msg.chat.id, path);
+        try {
+            const path = await takePicture();
+            if (path) await bot.sendPhoto(msg.chat.id, path);
+        } catch (error) {
+            console.error("Error with taking picture: ", error);
+            await bot.sendMessage(msg.chat.id, "Не зміг отримати зображення з веб-камери!");
+        }
     });
 
     bot.on("photo", async msg => {
