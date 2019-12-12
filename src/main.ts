@@ -80,7 +80,11 @@ if (TELEGRAM_BOT_TOKEN) {
     });
 
     bot.on("photo", async msg => {
-        console.log("Message:\n", msg);
+        console.log("Photo info:\n", msg);
+    });
+
+    bot.on("document", async msg => {
+        console.log("Document info:\n", msg);
     });
 } else {
     console.error("You must define TELEGRAM_BOT_TOKEN in .env!");
