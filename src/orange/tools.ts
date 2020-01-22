@@ -1,13 +1,10 @@
 import * as fs from "fs";
 import { PATH_TO } from "../constants";
-import { Log } from "@uk/log";
 
 export type SysInfo = number | string;
 export interface SysData {
     [value: string]: SysInfo;
 }
-
-const log = new Log(__filename);
 
 export function getSysInfo(path: string): SysData {
     let res: SysData = {

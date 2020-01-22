@@ -1,18 +1,13 @@
-import * as TelegramBot from "node-telegram-bot-api";
 import * as dotenv from "dotenv";
-import { Log } from "@uk/log";
-
-import { mainMenu } from "./states/mainmenu";
-import { stateMenu } from "./states/devicestatemenu";
-
-import { getSysInfo } from "./orange";
+import * as TelegramBot from "node-telegram-bot-api";
 import { PATH_TO } from "./constants";
-import { StartMenu } from "./states/startmenu";
+import { getSysInfo, takePicture } from "./orange";
+import { stateMenu } from "./states/devicestatemenu";
 import { chooseIO } from "./states/inlinechooseio";
-import { takePicture } from "./orange";
+import { mainMenu } from "./states/mainmenu";
+import { StartMenu } from "./states/startmenu";
 
 dotenv.config();
-const log = new Log(__filename);
 
 const { TELEGRAM_BOT_TOKEN } = process.env;
 if (TELEGRAM_BOT_TOKEN) {
@@ -22,7 +17,6 @@ if (TELEGRAM_BOT_TOKEN) {
         await bot.sendMessage(msg.chat.id, "https://telegra.ph/PASTE_YOUR_LINK_HERE", {
             reply_markup: mainMenu,
         });
-
     });
 
     bot.onText(/\/start|Старт/, async msg => {
