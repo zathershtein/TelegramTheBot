@@ -18,6 +18,13 @@ const { TELEGRAM_BOT_TOKEN } = process.env;
 if (TELEGRAM_BOT_TOKEN) {
     const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 
+    bot.onText(/\/demo/, async msg => {
+        await bot.sendMessage(msg.chat.id, "https://telegra.ph/Prodlyuks-12-27", {
+            reply_markup: mainMenu,
+        });
+
+    });
+
     bot.onText(/\/start|Старт/, async msg => {
         await bot.sendMessage(msg.chat.id, "Здоровеньки були!", {
             reply_markup: mainMenu,
