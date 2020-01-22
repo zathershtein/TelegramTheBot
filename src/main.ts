@@ -19,7 +19,7 @@ if (TELEGRAM_BOT_TOKEN) {
     const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 
     bot.onText(/\/demo/, async msg => {
-        await bot.sendMessage(msg.chat.id, "https://telegra.ph/Prodlyuks-12-27", {
+        await bot.sendMessage(msg.chat.id, "https://telegra.ph/PASTE_YOUR_LINK_HERE", {
             reply_markup: mainMenu,
         });
 
